@@ -195,7 +195,7 @@ The system is usable overall as a prototype but has room for improvement.
 
 1. **SQLite Database** SQLite has zero configuration, no installation required, and does not need to be run separately. In a production system, however I would use PostgreSQL to support multiple concurrent connections and larger data volumes. 
 
-2. **No Proper Authentication** The reviewer name field an input not a login which is suitable for a prototype. In a production system, however, I would need to add proper user authentication and authorization to support role-based permissions.
+2. **No Proper Authentication** The reviewer name is a field input which is suitable for a prototype. In a production system, however, I would need to add proper authentication and authorization to support user role-based permissions.
 
 3. **PII Masking and Data Privacy** Call transcripts may contain Personal Identifiable Information such as names, phone numbers, or payment details. In this prototype, transcripts are sent directly to the LLM and stored without censoring the information which would pose a security issue.
 

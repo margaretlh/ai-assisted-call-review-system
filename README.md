@@ -1,4 +1,4 @@
-# AI-Assisted Call Review System - My Implemented Solution
+# Implemented Solution: AI-Assisted Call Review System
 
 An internal tool for reviewing and managing call outcomes. The system ingests call transcripts and uses Gemini 1.5 Flash to classify outcomes. It directs ambiguous cases to human reviewers, and tracks final decisions. 
 

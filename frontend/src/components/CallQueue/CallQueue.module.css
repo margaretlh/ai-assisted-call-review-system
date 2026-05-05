@@ -1,0 +1,203 @@
+.container {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filterBtn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: all 0.15s;
+}
+
+.filterBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filterBtnActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.filterBtnActive:hover {
+  color: white;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.1s;
+  gap: 16px;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.row:hover {
+  background: var(--color-bg);
+}
+
+.rowLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.externalId {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+.goal {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text);
+}
+
+.rowRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.badgeSuccess {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.badgeDanger {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.badgeWarning {
+  background: #fff3cd;
+  color: #664d03;
+}
+
+.badgeNeutral {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.confidenceWrap {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.confidenceBar {
+  height: 6px;
+  border-radius: 3px;
+  flex: 1;
+}
+
+.conf_high { background: var(--color-success); }
+.conf_medium { background: var(--color-warning); }
+.conf_low { background: var(--color-danger); }
+
+.confidenceLabel {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.statusBadge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.statusReviewed {
+  background: #cff4fc;
+  color: #055160;
+}
+
+.statusPending {
+  background: #fff3cd;
+  color: #664d03;
+}
+
+.statusAuto {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.noAnalysis {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.error {
+  margin: 12px 20px;
+  padding: 10px 14px;
+  background: #f8d7da;
+  color: #842029;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+}

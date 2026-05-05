@@ -1,0 +1,167 @@
+[
+  {
+    "id": "call_001",
+    "goal": "schedule_appointment",
+    "transcript": "Hi, I'm calling to follow up. Yes, Thursday at 2pm works great. Thank you, see you then.",
+    "metadata": { "duration_seconds": 120 }
+  },
+  {
+    "id": "call_002",
+    "goal": "schedule_appointment",
+    "transcript": "Uh yeah I'm kind of busy right now. Can you call me back next week maybe?",
+    "metadata": { "duration_seconds": 45 }
+  },
+  {
+    "id": "call_003",
+    "goal": "collect_payment",
+    "transcript": "I’m not interested. Please don’t call me again.",
+    "metadata": { "duration_seconds": 30 }
+  },
+  {
+    "id": "call_004",
+    "goal": "collect_payment",
+    "transcript": "Yeah I can pay that. Let me grab my card... actually hold on... hello? ... hello?",
+    "metadata": { "duration_seconds": 90 }
+  },
+  {
+    "id": "call_005",
+    "goal": "resolve_support_issue",
+    "transcript": "Thank you for calling. Please leave a message after the tone.",
+    "metadata": { "duration_seconds": 20 }
+  },
+  {
+    "id": "call_006",
+    "goal": "resolve_support_issue",
+    "transcript": "Yeah I tried restarting it and it still doesn’t work. This is really frustrating. Can someone else help me?",
+    "metadata": { "duration_seconds": 150 }
+  },
+  {
+    "id": "call_007",
+    "goal": "schedule_appointment",
+    "transcript": "",
+    "metadata": { "duration_seconds": 0 }
+  },
+  {
+    "id": "call_008",
+    "goal": "collect_payment",
+    "transcript": "Hi this is a business line, you have the wrong number.",
+    "metadata": { "duration_seconds": 25 }
+  },
+  {
+    "id": "call_009",
+    "goal": "resolve_support_issue",
+    "transcript": "Okay great, that fixed it. Thanks for your help, appreciate it.",
+    "metadata": { "duration_seconds": 110 }
+  },
+  {
+    "id": "call_010",
+    "goal": "collect_payment",
+    "transcript": "I mean I might be able to pay later, I just don’t have time right now.",
+    "metadata": { "duration_seconds": 60 }
+  },
+  {
+    "id": "call_011",
+    "goal": "schedule_appointment",
+    "transcript": "Yeah sure, schedule it I guess. Actually wait, no, I need to check my calendar. I’ll call back.",
+    "metadata": { "duration_seconds": 75 }
+  },
+  {
+    "id": "call_012",
+    "goal": "collect_payment",
+    "transcript": "Sure, go ahead and charge the card on file.",
+    "metadata": { "duration_seconds": 50 }
+  },
+  {
+    "id": "call_013",
+    "goal": "resolve_support_issue",
+    "transcript": "I don’t know, it’s still kind of broken but I’ll just deal with it for now.",
+    "metadata": { "duration_seconds": 95 }
+  },
+  {
+    "id": "call_014",
+    "goal": "schedule_appointment",
+    "transcript": "Hi, I already told someone I’m not interested in this. Please stop calling.",
+    "metadata": { "duration_seconds": 40 }
+  },
+  {
+    "id": "call_015",
+    "goal": "collect_payment",
+    "transcript": "Hello? ... yeah I can hear you. Wait, I think the line is cutting out... hello?",
+    "metadata": { "duration_seconds": 80 }
+  },
+  {
+    "id": "call_016",
+    "goal": "resolve_support_issue",
+    "transcript": "This is unacceptable. I’ve called three times and nobody has fixed this. I want to speak to a manager.",
+    "metadata": { "duration_seconds": 140 }
+  },
+  {
+    "id": "call_017",
+    "goal": "schedule_appointment",
+    "transcript": "Hi, sorry, I think you have the wrong person.",
+    "metadata": { "duration_seconds": 20 }
+  },
+  {
+    "id": "call_018",
+    "goal": "collect_payment",
+    "transcript": "Yeah go ahead and send me the link, I’ll take care of it later today.",
+    "metadata": { "duration_seconds": 55 }
+  },
+  {
+    "id": "call_019",
+    "goal": "resolve_support_issue",
+    "transcript": "Thanks, I think that solved it... actually wait, no it’s still happening sometimes.",
+    "metadata": { "duration_seconds": 130 }
+  },
+  {
+    "id": "call_020",
+    "goal": "schedule_appointment",
+    "transcript": "Yes, Monday morning works. Please book that.",
+    "metadata": { "duration_seconds": 65 }
+  },
+  {
+    "id": "call_021",
+    "goal": "Collect an outstanding payment from the customer",
+    "transcript": "Hola? No entiendo... ¿Puede hablar más despacio? No hablo inglés bien. ¿Qué quiere?",
+    "metadata": {
+      "duration_seconds": 85,
+      "note": "EDGE CASE: Non-English speaker — tests language barrier handling and whether the classifier avoids false confidence"
+    }
+  },
+  {
+    "id": "call_022",
+    "goal": "Schedule a follow-up appointment with the customer",
+    "transcript": "No. Not interested.",
+    "metadata": {
+      "duration_seconds": 8,
+      "note": "EDGE CASE: Severely truncated — very short transcript could be a refusal or could have been cut off; tests incomplete-data handling"
+    }
+  },
+  {
+    "id": "call_023",
+    "goal": "Schedule a follow-up appointment with the customer",
+    "transcript": "She's not home right now. This is her husband. Can I take a message? She might be able to call back later this week.",
+    "metadata": {
+      "duration_seconds": 55,
+      "note": "EDGE CASE: Third party — reached a family member, not the intended contact; tests wrong-person vs partial-engagement distinction"
+    }
+  },
+  {
+    "id": "call_024",
+    "goal": "Collect an outstanding payment from the customer",
+    "transcript": "Fine, I'll pay, but I want you to know I think that amount is wrong. I only owe you half that. I'll pay it under protest but I'm disputing this charge with my bank.",
+    "metadata": {
+      "duration_seconds": 110,
+      "note": "EDGE CASE: Partial success + compliance risk — payment was made but customer is disputing and may initiate a chargeback; tests multi-outcome ambiguity"
+    }
+  },
+  {
+    "id": "call_025",
+    "goal": "Resolve an open support issue for the customer",
+    "transcript": "Yeah yeah okay... uh huh... okay I understand what you're saying but like... I don't know man... maybe... look I gotta go.",
+    "metadata": {
+      "duration_seconds": 70,
+      "note": "EDGE CASE: Ambiguous engagement — responses are non-committal and vague throughout; tests whether the classifier avoids forcing a definitive outcome"
+    }
+  }
+]

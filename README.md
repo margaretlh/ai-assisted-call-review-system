@@ -115,7 +115,7 @@ And I account for various edge cases. For instance, a call can have a clear outc
 | `CONNECTED_ESCALATION` | Needs escalation to specialist | **Always reviewed** |
 | `AMBIGUOUS` | Cannot determine outcome clearly | **Always reviewed** |
 
-**Review triggers** (in priority order):
+**Review Case Triggers** (in priority order):
 1. Outcome is `REFUSED`, `ESCALATION`, or `AMBIGUOUS` — always
 2. Outcome is `CONNECTED_PARTIAL` — always (follow-up is a human decision)
 3. Confidence below 0.70 — always
@@ -168,9 +168,9 @@ and returns:
 
 **Why I chose Gemini 1.5 Flash:** The task requires understanding conversational context, user intent, and edge cases (such as with distinguishing "I'll call back later" from "please stop calling"). Gemini 1.5 Flash is great for classifying short-text items and also provides a free tier option.
 
-**Why `temperature=0.1`:** Classification: Low temperature value reduces variance in repeated analyses of the same transcript.
+**Threshold Values:** Classification: Low temperature value reduces variance in repeated analyses of the same transcript.
 
-**Failure handling:** If the API call fails or the response can't be parsed, the system returns `{outcome: AMBIGUOUS, confidence: 0, requires_review: true, flags: ["classifier-error"]}`. This ensures failures are always surfaced for human review rather than silently auto-handled.
+**Failure Handling:** If the API call fails or the response can't be parsed, the system returns `{outcome: AMBIGUOUS, confidence: 0, requires_review: true, flags: ["classifier-error"]}`. This ensures failures are always surfaced for human review rather than silently auto-handled.
 
 ---
 
@@ -180,11 +180,11 @@ and returns:
 
 **Used Gemini 1.5 LLM** Has free tier access and supports long call transcripts without chunking, but occasionally will have malformed JSON output.
 
-**Always-review for partial outcomes.** `CONNECTED_PARTIAL` always requires review even at 99% confidence. This is intentional as partial outcomes involve follow-up decisions that require human judgment. The tradeoff is more review load.
+**Always Reviewing Partial Outcomes.** `CONNECTED_PARTIAL` always requires review even at 99% confidence. This is intentional as partial outcomes involve follow-up decisions that require human judgment. The tradeoff is more review load.
 
-**No multi-label outcomes.** Some calls have multiple relevant outcomes (i.e. payment made + amount disputed). I set the taxonomy to use single primary code and used flags to indicate the other outcomes for simplicity.
+**No Multi-label Outcomes.** Some calls have multiple relevant outcomes (i.e. payment made + amount disputed). I set the taxonomy to use single primary code and used flags to indicate the other outcomes for simplicity.
 
-**Re-analysis creates a new record.** Clicking "Re-analyze" creates a new `CallAnalysis` row rather than updating the existing one. This preserves the full audit log while the UI always shows the latest analysis.
+**Re-Analyze Creates New Record.** Clicking "Re-analyze" creates a new `CallAnalysis` row rather than updating the existing one. This preserves the full audit log while the UI always shows the latest analysis.
 
 
 ---
@@ -201,16 +201,16 @@ The system is usable overall as a prototype but has room for improvement.
 
 In a production system, I would introduce a PII masking layer before sending data to the model. Sensitive fields would be replaced with placeholders to reduce privacy and compliance risk.
 
-4. **Classification delay** AI classificaton is currently performed synchronously which can cause latency when user and call volume increases so I would move classification to an asynchronous workflow using a task queue like Celery. 
+4. **Classification Delay** AI classificaton is currently performed synchronously which can cause latency when user and call volume increases so I would move classification to an asynchronous workflow using a task queue like Celery. 
 
-5. **Non-English transcripts.** The model can handle some non-English text but I did not prompt it to handle with multiple language translations. Confidence will often be low in these cases and the `language-barrier` flag should trigger, as demonstrated in `call_021`.
+5. **Non-English Transcripts.** The model can handle some non-English text but I did not prompt it to handle with multiple language translations. Confidence will often be low in these cases and the `language-barrier` flag should trigger, as demonstrated in `call_021`.
 
-6. **Short transcripts are unreliable.** The model will guess in cases with short transcripts. A 3-word transcript like "No. Not interested." could be a refusal, a dropped call, or a wrong number. (i.e. `call_022`). 
+6. **Unreliable Short Transcripts** The model will guess in cases with short transcripts. A 3-word transcript like "No. Not interested." could be a refusal, a dropped call, or a wrong number. (i.e. `call_022`). 
 
-7. **Third-party answers.** When a family member answers, the model must infer that the goal was not achieved with the intended person. This is subtle and the model can mistake it for a partial success. `call_023` demonstrates this.
+7. **Third-party Answers.** When a family member answers, the model must infer that the goal was not achieved with the intended person. This is subtle and the model can mistake it for a partial success. `call_023` demonstrates this.
 
-8. **Ambiguous payment disputes.** `call_024` — payment was collected but the customer is disputing the charge. The "goal" (collect payment) was technically achieved, but there's a compliance risk. The model may classify this as `CONNECTED_SUCCESS` and miss the compliance signal.
+8. **Ambiguous Payment Disputes.** `call_024` — payment was collected but the customer is disputing the charge. The "goal" (collect payment) was technically achieved, but there's a compliance risk. The model may classify this as `CONNECTED_SUCCESS` and miss the compliance signal.
 
-9. **Vague, non-committal language.** `call_025` — the person never says yes or no. The model may assign `CONNECTED_PARTIAL` or `AMBIGUOUS`. Both are defensible. The confidence should be low.
+9. **Vague Call Language.** `call_025` — the person never says yes or no. The model may assign `CONNECTED_PARTIAL` or `AMBIGUOUS`. Both are defensible. The confidence should be low.
 
-10. **API cost at scale.** Every `POST /analyze/` call hits the OpenAI API. At a high volume, this needs batching, caching, or a cheaper model for obvious cases (e.g., empty transcripts).
+10. **High API Costs.** Every `POST /analyze/` call hits the OpenAI API. At a high volume, this needs batching, caching, or a cheaper model for obvious cases (e.g., empty transcripts).

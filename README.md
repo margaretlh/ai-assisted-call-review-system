@@ -213,4 +213,4 @@ In a production system, I would introduce a PII masking layer before sending dat
 
 9. **Vague Call Language.** `call_025` — the person never says yes or no. The model may assign `CONNECTED_PARTIAL` or `AMBIGUOUS`. Both are defensible. The confidence should be low.
 
-10. **High API Costs.** Every `POST /analyze/` call hits the OpenAI API. At a high volume, this needs batching, caching, or a cheaper model for obvious cases (e.g., empty transcripts).
+10. **High API Costs.** Every `POST /analyze/` call hits the (Google) Gemini 1.5 API. At a high volume, this needs batching, caching, or a cheaper model for obvious cases (e.g., empty transcripts).
